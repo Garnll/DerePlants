@@ -192,3 +192,166 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1627553715
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1627553717}
+  - component: {fileID: 1627553716}
+  m_Layer: 0
+  m_Name: Phrases_Pool_Object
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1627553716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1627553715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f651d05beede37b4d967c8ac4a2d1747, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  phrasesPositive:
+  - love: 10
+    loveType: 1
+    myPhrase: Your leaves are greener than ever!
+    editThisPhrase: 0
+  - love: 10
+    loveType: 1
+    myPhrase: I be-leaf in you!
+    editThisPhrase: 0
+  - love: 10
+    loveType: 1
+    myPhrase: Aloe you vera much.
+    editThisPhrase: 0
+  - love: 10
+    loveType: 1
+    myPhrase: I think you are succulent.
+    editThisPhrase: 0
+  - love: 10
+    loveType: 1
+    myPhrase: "Please don\u2019t ever leaf me."
+    editThisPhrase: 0
+  - love: 10
+    loveType: 1
+    myPhrase: "We\u2019re mint to be together."
+    editThisPhrase: 0
+  - love: 10
+    loveType: 1
+    myPhrase: You are sweet as glucose.
+    editThisPhrase: 0
+  - love: 10
+    loveType: 1
+    myPhrase: Are you wearing planties?
+    editThisPhrase: 0
+  - love: 10
+    loveType: 1
+    myPhrase: "You\u2019re pretty rad-ish."
+    editThisPhrase: 0
+  - love: 10
+    loveType: 1
+    myPhrase: "I miss u berry much.\r"
+    editThisPhrase: 0
+  phrasesAmbiguous:
+  - love: 15
+    loveType: 0
+    myPhrase: Howdy!
+    editThisPhrase: 0
+  - love: 15
+    loveType: 0
+    myPhrase: Is that your leaf?
+    editThisPhrase: 0
+  - love: 15
+    loveType: 0
+    myPhrase: Are we plants, or are we dancers?
+    editThisPhrase: 0
+  - love: 15
+    loveType: 0
+    myPhrase: Is this your final form?
+    editThisPhrase: 0
+  - love: 15
+    loveType: 0
+    myPhrase: All that I can see is just another lemon tree.
+    editThisPhrase: 0
+  - love: 15
+    loveType: 0
+    myPhrase: You look moist today.
+    editThisPhrase: 0
+  - love: 15
+    loveType: 0
+    myPhrase: Sunlight, Sunshine.
+    editThisPhrase: 0
+  - love: 15
+    loveType: 0
+    myPhrase: "Daisy me rolling\u2026 They hating!"
+    editThisPhrase: 0
+  - love: 15
+    loveType: 0
+    myPhrase: May the Forest be with you.
+    editThisPhrase: 0
+  - love: 15
+    loveType: 0
+    myPhrase: I love it when you call me Big Poppy.
+    editThisPhrase: 0
+  phrasesNegative:
+  - love: 10
+    loveType: -1
+    myPhrase: Eww! A vegetable with face.
+    editThisPhrase: 0
+  - love: 10
+    loveType: -1
+    myPhrase: Omae wa mo shindeiru.
+    editThisPhrase: 0
+  - love: 10
+    loveType: -1
+    myPhrase: You remind me of my ex-plant.
+    editThisPhrase: 0
+  - love: 10
+    loveType: -1
+    myPhrase: Grow already!
+    editThisPhrase: 0
+  - love: 10
+    loveType: -1
+    myPhrase: "I think I should check other plants.\r"
+    editThisPhrase: 0
+  - love: 10
+    loveType: -1
+    myPhrase: "Aren\u2019t you asexual?"
+    editThisPhrase: 0
+  - love: 10
+    loveType: -1
+    myPhrase: I think you have a drinking problem.
+    editThisPhrase: 0
+  - love: 10
+    loveType: -1
+    myPhrase: woah im leafing.
+    editThisPhrase: 0
+  - love: 10
+    loveType: -1
+    myPhrase: Be nice or Leaf.
+    editThisPhrase: 0
+  - love: 10
+    loveType: -1
+    myPhrase: Succ it up!
+    editThisPhrase: 0
+--- !u!4 &1627553717
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1627553715}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
