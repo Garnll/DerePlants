@@ -13,4 +13,14 @@ public class Phrase {
     //Para el editor
     public bool editThisPhrase;
 
+    //Para la pool
+    public bool[] usedByPlayer = new bool[2];
+
+    public Phrase()
+    {
+        for (int i = 0; i < usedByPlayer.Length; i++)
+        {
+            usedByPlayer[i] = false;
+        }
+    }
 }
