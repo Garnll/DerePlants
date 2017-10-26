@@ -25,11 +25,22 @@ public class Phrase_Selector : MonoBehaviour {
     {
         if (phrasePoolManager.PhrasesOnPoolCount > 0)
         {
+
             int randomNumber = 0;
             while (chosenPhrase == null)
             {
                 randomNumber = Random.Range(0, phrasePoolManager.PhrasesOnPoolCount - 1);
                 chosenPhrase = phrasePoolManager.PhrasePickOne(randomNumber, phraseType);
+
+                if (phrasePoolManager.PhrasesUsedByPlayerCount <= 0)
+                {
+                    Debug.Log("Se está intentando conseguir más frases cuando ya no hay para este jugador");
+                    break;
+                }
+                else
+                {
+                    Debug.Log(phrasePoolManager.PhrasesUsedByPlayerCount);
+                }
             }
 
             phrasePoolManager.PhraseFreeOne(randomNumber);

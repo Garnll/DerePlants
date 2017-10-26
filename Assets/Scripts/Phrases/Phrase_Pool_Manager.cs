@@ -59,6 +59,22 @@ public class Phrase_Pool_Manager : MonoBehaviour
         }
     }
 
+    public int PhrasesUsedByPlayerCount
+    {
+        get
+        {
+            int counter = 0;
+            for (int i = 0; i < phrasesOnPool.Count; i++)
+            {
+                if (phrasesOnPool[i].usedByPlayer[currentTurnOnPool - 1] == false)
+                {
+                    counter++;
+                }
+            }
+
+            return counter;
+        }
+    }
 
     public Phrase PhrasePickOne(int index, Love_Type tipo)
     {
