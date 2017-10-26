@@ -39,6 +39,8 @@ public class Phrase_Pool_Manager : MonoBehaviour
         AddPoolsToUltraPool(phrasesPool.phrasesPositive);
         AddPoolsToUltraPool(phrasesPool.phrasesNegative);
         AddPoolsToUltraPool(phrasesPool.phrasesAmbiguous);
+
+        ChangeTurnOnPool(1); //Cambio de turno temporal mientras las cosas funcionan equs
     }
 
     private void AddPoolsToUltraPool(Phrase[] pool)

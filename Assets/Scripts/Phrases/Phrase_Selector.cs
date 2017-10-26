@@ -1,20 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Phrase_Selector : MonoBehaviour {
 
     private Phrase_Pool_Manager phrasePoolManager;
+
+    [HideInInspector]
     public Phrase chosenPhrase = null;
+    [HideInInspector]
     public Love_Type phraseType;
+
+    public Text myText;
 
 	// Use this for initialization
 	private void Start ()
     {
-        phrasePoolManager = Phrase_Pool_Manager.Instance();	
+        phrasePoolManager = Phrase_Pool_Manager.Instance();
+        myText = GetComponentInChildren<Text>();
 	}
 	
-    public Phrase ChoosePhrase()
+    public void ChoosePhrase()
     {
         if (phrasePoolManager.PhrasesOnPoolCount > 0)
         {
@@ -31,12 +38,13 @@ public class Phrase_Selector : MonoBehaviour {
         {
             Debug.Log("Se está intentando conseguir más frases cuando ya no hay");
         }
-
-        return chosenPhrase;
     }
 
     public void LoosePhrase()
     {
-        chosenPhrase = null;
+        if (chosenPhrase != null)
+        {
+            chosenPhrase = null;
+        }
     }
 }

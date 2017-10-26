@@ -4,13 +4,21 @@ using UnityEngine;
 
 public class Input_Manager : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    //Singleton
+    private static Input_Manager inputManager;
+
+    public static Input_Manager Instance()
+    {
+        if (!inputManager)
+        {
+            inputManager = FindObjectOfType(typeof(Input_Manager)) as Input_Manager;
+            if (!inputManager)
+                Debug.LogError("There needs to be at least one GameObject with an Phrase_Pool_Manager script attached to it!");
+        }
+
+        return inputManager;
+    }
+
+
+
 }
