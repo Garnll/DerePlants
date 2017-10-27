@@ -15,7 +15,7 @@ public class Phrase_Selector : MonoBehaviour {
     public Text myText;
 
 	// Use this for initialization
-	private void Start ()
+	private void Awake ()
     {
         phrasePoolManager = Phrase_Pool_Manager.Instance();
         myText = GetComponentInChildren<Text>();
@@ -23,23 +23,35 @@ public class Phrase_Selector : MonoBehaviour {
 	
     public void ChoosePhrase()
     {
+        if (phrasePoolManager.PhrasesUsedByPlayerCount < 1)
+        {
+            Debug.Log("Stop it");
+            return;
+        }
+
         if (phrasePoolManager.PhrasesOnPoolCount > 0)
         {
 
             int randomNumber = 0;
-            while (chosenPhrase == null)
+            int pleaseDontDie = 0;
+            while (chosenPhrase == null && pleaseDontDie <= 100)
             {
-                randomNumber = Random.Range(0, phrasePoolManager.PhrasesOnPoolCount - 1);
-                chosenPhrase = phrasePoolManager.PhrasePickOne(randomNumber, phraseType);
-
-                if (phrasePoolManager.PhrasesUsedByPlayerCount <= 0)
+                pleaseDontDie++;
+                if (phrasePoolManager.PhrasesUsedByPlayerCount < 1)
                 {
-                    Debug.Log("Se está intentando conseguir más frases cuando ya no hay para este jugador");
-                    break;
+                    Debug.Log("Se usa el while cuando no debería");
+                    return;
                 }
-                else
+
+                if (phrasePoolManager.PhrasesUsedByPlayerCount > 3)
                 {
-                    Debug.Log(phrasePoolManager.PhrasesUsedByPlayerCount);
+                    randomNumber = Random.Range(0, phrasePoolManager.PhrasesOnPoolCount - 1);
+                    chosenPhrase = phrasePoolManager.PhrasePickOne(randomNumber, phraseType);
+                }
+                else if (phrasePoolManager.PhrasesUsedByPlayerCount <= 3)
+                {
+                    randomNumber = phrasePoolManager.LastThreePick(phraseType);
+                    chosenPhrase = phrasePoolManager.PhrasePickOne(randomNumber, phraseType);
                 }
             }
 

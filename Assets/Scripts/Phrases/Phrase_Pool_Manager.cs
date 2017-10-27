@@ -76,6 +76,30 @@ public class Phrase_Pool_Manager : MonoBehaviour
         }
     }
 
+    public int LastThreePick(Love_Type tipo)
+    {
+        int thisOne;
+        thisOne = -1;
+
+        for (int i = 0; i < phrasesOnPool.Count; i++)
+        {
+            if (phrasesOnPool[i].usedByPlayer[currentTurnOnPool - 1] == false)
+            {
+                if (phrasesOnPool[i].loveType == tipo)
+                {
+                    thisOne = i;
+                    break;
+                }
+            }
+        }
+        if (thisOne == -1)
+        {
+            Debug.LogError("no se logró");
+        }
+
+        return thisOne;
+    }
+
     public Phrase PhrasePickOne(int index, Love_Type tipo)
     {
         Phrase phraseToSend;
