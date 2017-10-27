@@ -50,7 +50,7 @@ public class Input_Manager : MonoBehaviour {
     {
 
         //Todo a partir de aca es temporal
-        Debug.Log(phraseSelectorInButton.chosenPhrase.love);
+        //Debug.Log(phraseSelectorInButton.chosenPhrase.love);
         Nuevasfrases();
 
     }

@@ -245,7 +245,7 @@ MonoBehaviour:
     editThisPhrase: 0
     usedByPlayer: 0000
   phraseType: 0
-  myText: {fileID: 0}
+  myText: {fileID: 1343451604}
 --- !u!114 &414332797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -396,18 +396,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 529485005}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1837430050}
-        m_MethodName: ButtonPressed
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &529485005
@@ -461,7 +450,7 @@ MonoBehaviour:
     editThisPhrase: 0
     usedByPlayer: 0000
   phraseType: 0
-  myText: {fileID: 0}
+  myText: {fileID: 1668549578}
 --- !u!1 &618597937
 GameObject:
   m_ObjectHideFlags: 0
@@ -1042,7 +1031,7 @@ MonoBehaviour:
     editThisPhrase: 0
     usedByPlayer: 0000
   phraseType: 0
-  myText: {fileID: 0}
+  myText: {fileID: 724219359}
 --- !u!114 &1645554822
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1429,5 +1418,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8d74e9791de52d47b56a378fba9f08a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  phrasesButtons: []
+  phrasesButtons:
+  - {fileID: 529485004}
+  - {fileID: 414332797}
+  - {fileID: 1645554822}
   phraseSelectorController: {fileID: 1708095295}

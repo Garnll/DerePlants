@@ -32,6 +32,11 @@ public class Phrase_Selector_Controller : MonoBehaviour {
             phraseSelector[i].LoosePhrase();
 
             phraseSelector[i].ChoosePhrase();
+            if (phraseSelector[i].chosenPhrase == null)
+            {
+                Debug.Log("No se pudo crear la frase");
+                return;
+            }
         }
 
         Show_UI_Gameplay.UpdatePhrases(phraseSelector);
