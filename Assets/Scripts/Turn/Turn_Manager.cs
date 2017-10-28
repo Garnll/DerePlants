@@ -4,20 +4,26 @@ using UnityEngine;
 
 public class Turn_Manager : MonoBehaviour {
 
-	public const int TOTAL_TURNS = 10;
-	public const float TURN_TIME = 5.0f;
+	public const int TOTAL_TURNS = 20;
+	public const float TURN_TIME = 0.001f;
 
 	public Player[] players = new Player[2];
 	Player currentPlayer;
 	int currentTurn;
 
-	void Start () {
-		currentTurn = 1;
-	
-		players[0] = new Player(1, new HumanBehaviour());
-		players[1] = new Player(2, new CpuBehaviour());
+	public delegate void TurnManagerEvent();
+	public static event TurnManagerEvent OnTurnSystemStarted;
+	public static event TurnManagerEvent OnTurnSystemFinished;
 
-		activatePlayer(players[0]);
+	public delegate void SpecificTurnEvent(int turn);
+	public static event SpecificTurnEvent OnTurnChanged;
+
+
+	void Awake() {
+	}
+
+	void Start () {
+		startTurns();
 		StartCoroutine(turn());
 	}
 
@@ -26,6 +32,19 @@ public class Turn_Manager : MonoBehaviour {
 			yield return new WaitForSeconds(TURN_TIME);
 			switchTurn();
 		}
+
+		OnTurnSystemFinished();
+	}
+
+	void startTurns() {
+		currentTurn = 1;
+
+		players[0] = new Player(1, new HumanBehaviour());
+		players[1] = new Player(2, new CpuBehaviour());
+
+		activatePlayer(players[0]);
+
+		OnTurnSystemStarted();
 	}
 
 	void activatePlayer(Player player) {
@@ -43,6 +62,9 @@ public class Turn_Manager : MonoBehaviour {
 		else {
 			activatePlayer(players[0]);
 		}
+
+		OnTurnChanged(currentTurn);
+
 	}
 
 
