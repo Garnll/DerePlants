@@ -16,11 +16,13 @@ public class Phrase {
     //Para la pool
     public bool[] usedByPlayer = new bool[2];
 
-    public Phrase()
-    {
-        for (int i = 0; i < usedByPlayer.Length; i++)
-        {
+    public Phrase(){
+        for (int i = 0; i < usedByPlayer.Length; i++){
             usedByPlayer[i] = false;
         }
     }
+
+	public void useBy(int player) {
+		usedByPlayer[player] = true;
+	}
 }

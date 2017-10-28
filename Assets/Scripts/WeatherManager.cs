@@ -55,9 +55,9 @@ public class WeatherManager : MonoBehaviour {
 		timesByWeather[currentPlayer, w.id]++;
 		setTurnsRepeated(lastWeather);
 
-		Debug.Log("----> Weather for player " + (currentPlayer + 1) + " is now " + currentWeather.name 
-			+ " by " + timesByWeather[currentPlayer, w.id] + " time" + " and has been repeated " 
-			+ turnsWeatherBeenRepeated[w.id] + " times.");		
+		//Debug.Log("----> Weather for player " + (currentPlayer + 1) + " is now " + currentWeather.name 
+		//	+ " by " + timesByWeather[currentPlayer, w.id] + " time" + " and has been repeated " 
+		//	+ turnsWeatherBeenRepeated[w.id] + " times.");		
 	}
 
 	// Switchs the Weather depending on various conditions.

@@ -8,24 +8,25 @@ public class Phrase_Selector_Controller : MonoBehaviour {
 
     private Phrase_Selector[] phraseSelector;
 
-    private void Start()
-    {
+	private void Awake() {
 		Turn_Manager.OnTurnStarted += PickNewPhrases;
-
 		phraseSelector = FindObjectsOfType<Phrase_Selector>();
-        if (phraseSelector.Length > 3)
-        {
-            Debug.LogError("Muchos Phrase_Selector en la escena");
-        }
-        else if (phraseSelector.Length < 3)
-        {
-            Debug.LogError("No hay suficientes Phrase_Selector en la escena");
-        }
+		if (phraseSelector.Length > 3) {
+			Debug.LogError("Muchos Phrase_Selector en la escena");
+		}
+		else if (phraseSelector.Length < 3) {
+			Debug.LogError("No hay suficientes Phrase_Selector en la escena");
+		}
+	}
 
-        PickNewPhrases(); //De momento
+	private void Start()
+    {
 
-		
-    }
+
+		//PickNewPhrases(); //De momento
+
+
+	}
 
     public void PickNewPhrases()
     {
@@ -36,6 +37,7 @@ public class Phrase_Selector_Controller : MonoBehaviour {
             phraseSelector[i].LoosePhrase();
 
             phraseSelector[i].ChoosePhrase();
+
             if (phraseSelector[i].chosenPhrase == null)
             {
                 Debug.Log("No se pudo crear la frase");

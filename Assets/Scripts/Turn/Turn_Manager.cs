@@ -5,7 +5,7 @@ using UnityEngine;
 public class Turn_Manager : MonoBehaviour {
 
 	public const int TOTAL_TURNS = 20;
-	public const float TURN_TIME = 1f;
+	public const float TURN_TIME = 4f;
 
 	public Player[] players = new Player[2];
 	Player currentPlayer;
@@ -18,6 +18,7 @@ public class Turn_Manager : MonoBehaviour {
 
 	public delegate void SpecificTurnEvent(int turn);
 	public static event SpecificTurnEvent OnTurnChanged;
+	public static event SpecificTurnEvent OnPlayerTurn;
 
 
 	void Awake() {
@@ -31,6 +32,7 @@ public class Turn_Manager : MonoBehaviour {
 	IEnumerator turn() {
 		while (currentTurn < TOTAL_TURNS) {
 			yield return new WaitForSeconds(TURN_TIME);
+			OnPlayerTurn(currentTurn);
 			OnTurnStarted();
 			switchTurn();
 		}
@@ -46,6 +48,8 @@ public class Turn_Manager : MonoBehaviour {
 
 		activatePlayer(players[0]);
 
+		OnPlayerTurn(currentTurn);
+		OnTurnStarted();
 		OnTurnSystemStarted();
 	}
 
