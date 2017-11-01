@@ -9,7 +9,9 @@ public class Phrase_Selector_Controller : MonoBehaviour {
     private Phrase_Selector[] phraseSelector;
 
 	private void Awake() {
+
 		Turn_Manager.OnTurnStarted += PickNewPhrases;
+
 		phraseSelector = FindObjectsOfType<Phrase_Selector>();
 		if (phraseSelector.Length > 3) {
 			Debug.LogError("Muchos Phrase_Selector en la escena");
@@ -19,14 +21,6 @@ public class Phrase_Selector_Controller : MonoBehaviour {
 		}
 	}
 
-	private void Start()
-    {
-
-
-		//PickNewPhrases(); //De momento
-
-
-	}
 
     public void PickNewPhrases()
     {

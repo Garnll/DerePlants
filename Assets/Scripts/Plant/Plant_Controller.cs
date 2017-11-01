@@ -4,13 +4,25 @@ using UnityEngine;
 
 public class Plant_Controller : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    private int multiplicator;
+
+    private void ReceiveHeight(int grosThisMuch)
+    {
+
+    }
+
+    private void ReceiveLove(Phrase phrase)
+    {
+
+    }
+
+    private void ReceivePowerUp()
+    {
+
+    }
+
+    private void ReceiveClimateAvertion(int ungrow)
+    {
+
+    }
 }

@@ -22,7 +22,7 @@ public class Show_UI_Gameplay : MonoBehaviour {
         for (int i = 0; i < _phraseSelector.Length; i++)
         {
             _phraseSelector[i].myText.text = _phraseSelector[i].chosenPhrase.myPhrase;
-			Debug.Log(_phraseSelector[i].chosenPhrase.myPhrase);
+			//Debug.Log(_phraseSelector[i].chosenPhrase.myPhrase);
         }
 
 	}

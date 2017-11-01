@@ -22,6 +22,8 @@ public class Input_Manager : MonoBehaviour {
 
     [SerializeField]
     private Button[] phrasesButtons;
+    [SerializeField]
+    private Turn_Manager turnManager;
 
     private void Start()
     {
@@ -38,6 +40,10 @@ public class Input_Manager : MonoBehaviour {
                 phrasesButtons[i] = tempPhraseSelector[i].gameObject.GetComponent<Button>();
             }
         }
+        if (turnManager == null)
+        {
+            turnManager = FindObjectOfType<Turn_Manager>();
+        }
 
         for (int i = 0; i < phrasesButtons.Length; i++)
         {
@@ -48,18 +54,6 @@ public class Input_Manager : MonoBehaviour {
 
     public void ButtonPressed(Phrase_Selector phraseSelectorInButton)
     {
-
-        //Todo a partir de aca es temporal
-        //Debug.Log(phraseSelectorInButton.chosenPhrase.love);
-        Nuevasfrases();
-
-    }
-
-    [SerializeField]
-    private Phrase_Selector_Controller phraseSelectorController;
-
-    private void Nuevasfrases()
-    {
-        phraseSelectorController.PickNewPhrases();
+        turnManager.switchTurn();
     }
 }
