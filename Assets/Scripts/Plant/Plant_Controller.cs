@@ -4,16 +4,29 @@ using UnityEngine;
 
 public class Plant_Controller : MonoBehaviour {
 
-    private int multiplicator;
+    /// <summary>
+    /// All of this is temp
+    /// </summary>
 
-    private void ReceiveHeight(int grosThisMuch)
+    private int growmultiplicator;
+    private Plant[] plants;
+
+    private void Awake()
     {
-
+        plants = FindObjectsOfType<Plant>();
     }
 
-    private void ReceiveLove(Phrase phrase)
+    private void ReceiveHeight(int growThisMuch)
     {
+        plants[0].Grow(growThisMuch);
+    }
 
+    public void ReceiveLove(Phrase phrase)
+    {
+        growmultiplicator = plants[0].CheckLove(phrase.loveType);
+
+        int newHeight = phrase.love * growmultiplicator;
+        ReceiveHeight(newHeight);
     }
 
     private void ReceivePowerUp()
