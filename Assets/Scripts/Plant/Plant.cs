@@ -79,7 +79,7 @@ public class Plant : MonoBehaviour {
     public void Grow(float newHeight)
     {
         newHeight = height + newHeight;
-        height = Mathf.Lerp(height, newHeight, Time.deltaTime / 1);
+        height = Mathf.Lerp(height, newHeight, Time.deltaTime / 1); //Esta es la animación
 
         if (height < newHeight)
         {

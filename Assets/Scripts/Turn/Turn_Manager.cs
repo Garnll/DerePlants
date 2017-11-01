@@ -78,5 +78,8 @@ public class Turn_Manager : MonoBehaviour {
         StartCoroutine("turn"); //Se vuelve a llamar la corrutina para que no funcione unicamente en loop y se pueda cancelar al hundir un botón
     }
 
-
+    public void stopCoroutine()
+    {
+        StopCoroutine("turn");//Se para la corrutina para que no funcione unicamente en loop y se pueda cancelar al hundir un botón
+    }
 }
