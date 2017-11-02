@@ -23,7 +23,7 @@ public class Turn_Manager : MonoBehaviour {
 
 	void Start () {
 		startTurns();
-		StartCoroutine(turn());
+		StartCoroutine("turn");
 	}
 
 	IEnumerator turn() {

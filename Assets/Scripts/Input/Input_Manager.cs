@@ -62,7 +62,8 @@ public class Input_Manager : MonoBehaviour {
 
     public void ButtonPressed(Phrase_Selector phraseSelectorInButton)
     {
-        turnManager.switchTurn(); //Temporal (se finalizará el turno al hacer animaciones
         plantController.ReceiveLove(phraseSelectorInButton.chosenPhrase); //Más temporal que tu p
+
+        turnManager.switchTurn(); //Temporal (se finalizará el turno al hacer animaciones
     }
 }
