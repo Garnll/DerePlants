@@ -23,6 +23,9 @@ public class Phrase_Selector : MonoBehaviour {
 	
     public void ChoosePhrase()
     {
+        //Debug.Log("Jugador en la Pool: " +phrasePoolManager.currentTurnOnPool);
+        
+
         if (phrasePoolManager.PhrasesUsedByPlayerCount < 1)
         {
             Debug.Log("Stop it");

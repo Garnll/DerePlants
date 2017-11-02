@@ -23,7 +23,7 @@ public class Phrase_Pool_Manager : MonoBehaviour
 
     private Phrase_Pool phrasesPool;
 
-    private int currentTurnOnPool;
+    public int currentTurnOnPool; //Testing. Cambiar a private
 
     private List<Phrase> phrasesOnPool = new List<Phrase>();
     private List<Phrase> phrasesUsed = new List<Phrase>();
@@ -32,8 +32,11 @@ public class Phrase_Pool_Manager : MonoBehaviour
 
 	private void Start()
     {
-		turn = 1; 
+		turn = 1;
+        currentTurnOnPool = -1;
+
 		Turn_Manager.OnPlayerTurn += ChangeTurnOnPool;
+
         phrasesPool = GameObject.FindObjectOfType<Phrase_Pool>();
         if (phrasesPool == null)
         {
@@ -44,7 +47,7 @@ public class Phrase_Pool_Manager : MonoBehaviour
         AddPoolsToUltraPool(phrasesPool.phrasesNegative);
         AddPoolsToUltraPool(phrasesPool.phrasesAmbiguous);
 
-        ChangeTurnOnPool(1); //Cambio de turno temporal mientras las cosas funcionan equs
+        //ChangeTurnOnPool(1); //Cambio de turno temporal mientras las cosas funcionan equs
     }
 
 	private void OnDestroy() {
@@ -161,12 +164,15 @@ public class Phrase_Pool_Manager : MonoBehaviour
         if (allPlayersHaveUsedIt == true)
         {
             phrasesUsed.Add(phrasesOnPool[index]);
+            phrasesOnPool.RemoveAt(index);
         }
     }
 
     //Recibirá un evento de cambio de turno
     private void ChangeTurnOnPool(int newTurn)
     {
+        //Debug.Log("Turno que llega desde Turn_Manager: \n" + newTurn);
+
 		if (newTurn  % 2 == 0) {
 			turn = 2;
 		} else {

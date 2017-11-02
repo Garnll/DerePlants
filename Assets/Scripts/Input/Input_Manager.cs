@@ -23,6 +23,12 @@ public class Input_Manager : MonoBehaviour {
     [SerializeField]
     private Button[] phrasesButtons;
 
+    //Cosasa temporales. Eliminar cuando se haga bien
+    [SerializeField]
+    private Turn_Manager turnManager;
+    [SerializeField]
+    private Plant_Controller plantController;
+
     private void Start()
     {
         if (phrasesButtons == null || phrasesButtons.Length == 0)
@@ -38,6 +44,14 @@ public class Input_Manager : MonoBehaviour {
                 phrasesButtons[i] = tempPhraseSelector[i].gameObject.GetComponent<Button>();
             }
         }
+        if (turnManager == null)
+        {
+            turnManager = FindObjectOfType<Turn_Manager>(); //temp
+        }
+        if (plantController == null)
+        {
+            plantController = FindObjectOfType<Plant_Controller>(); //temp
+        }
 
         for (int i = 0; i < phrasesButtons.Length; i++)
         {
@@ -48,18 +62,8 @@ public class Input_Manager : MonoBehaviour {
 
     public void ButtonPressed(Phrase_Selector phraseSelectorInButton)
     {
+        plantController.ReceiveLove(phraseSelectorInButton.chosenPhrase); //Más temporal que tu p
 
-        //Todo a partir de aca es temporal
-        //Debug.Log(phraseSelectorInButton.chosenPhrase.love);
-        Nuevasfrases();
-
-    }
-
-    [SerializeField]
-    private Phrase_Selector_Controller phraseSelectorController;
-
-    private void Nuevasfrases()
-    {
-        phraseSelectorController.PickNewPhrases();
+        turnManager.switchTurn(); //Temporal (se finalizará el turno al hacer animaciones
     }
 }

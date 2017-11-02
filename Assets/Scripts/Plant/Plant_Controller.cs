@@ -4,13 +4,43 @@ using UnityEngine;
 
 public class Plant_Controller : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    /// <summary>
+    /// All of this is temp
+    /// </summary>
+
+    private int growmultiplicator;
+    private Plant[] plants;
+
+    private void Awake()
+    {
+        plants = FindObjectsOfType<Plant>();
+    }
+
+    private void ReceiveHeight(int growThisMuch)
+    {
+        plants[0].Grow(growThisMuch);
+    }
+
+    public void ReceiveLove(Phrase phrase)
+    {
+        growmultiplicator = plants[0].CheckLove(phrase.loveType);
+
+        Debug.Log(phrase.myPhrase);
+
+        int newHeight = phrase.love * growmultiplicator;
+        Debug.Log("Nueva altura: " + newHeight);
+        Debug.Log("multiplicador: " + growmultiplicator);
+
+        ReceiveHeight(newHeight);
+    }
+
+    private void ReceivePowerUp()
+    {
+
+    }
+
+    private void ReceiveClimateAvertion(int ungrow)
+    {
+
+    }
 }
