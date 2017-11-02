@@ -9,7 +9,10 @@ public class WeatherManager : MonoBehaviour {
 	const float WEATHER0_P = 0.45f;
 
 	// This is how many times a Weather can be repeated consecutively:
-	const int MAX_TIMES_PER_WEATHER = 2;
+	const int MAX_TIMES_PER_WEATHER = 3;
+
+	// Maximum times the neutral weather can appear to a player in a session:
+	const int MAX_TIMES_WEATHER0 = 5;
 
 	Weather[] weathers;
 
@@ -178,7 +181,7 @@ public class WeatherManager : MonoBehaviour {
 		if (currentWeather == weathers[0]) {
 			return 2;
 		} else {
-			if (timesByWeather[currentPlayer, 0] > 5) {
+			if (timesByWeather[currentPlayer, 0] > MAX_TIMES_WEATHER0) {
 				int r = Random.Range(1, weathers.Length - 1);
 				return r;
 			}
