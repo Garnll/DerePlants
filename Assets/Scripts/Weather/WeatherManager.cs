@@ -191,7 +191,6 @@ public class WeatherManager : MonoBehaviour {
 		}
 	}
 
-	// Use this if getLessFrequentIndex doens't work, but somehow this doesn't work if there are more than 11 turns.
 	void forceAnotherWeather() {
 		if (currentWeather == weathers[0]) {
 			int r = Random.Range(1, weathers.Length - 1);
