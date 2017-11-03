@@ -28,8 +28,6 @@ public class Plant_Controller : MonoBehaviour {
         Debug.Log(phrase.myPhrase);
 
         int newHeight = phrase.love * growmultiplicator;
-        Debug.Log("Nueva altura: " + newHeight);
-        Debug.Log("multiplicador: " + growmultiplicator);
 
         ReceiveHeight(newHeight);
     }

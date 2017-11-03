@@ -93,46 +93,39 @@ public class Plant : MonoBehaviour {
     private IEnumerator GrowAnim(float heightToGo)
     {
         float heightReductor = heightToGo / 10;
-
-        if (heightToGo >= height)
+        while (height != heightToGo)
         {
-            Debug.Log("Altura más pequeña que la nueva");
+            yield return new WaitForEndOfFrame();
+            Debug.Log("Altura a llegar: " + heightToGo);
+            Debug.Log("Altura Actual: " + height);
 
-            while (height != heightToGo)
+            if (heightToGo >= height)
             {
-                yield return new WaitForEndOfFrame();
+                Debug.Log("Altura más pequeña que la nueva");
                 height = Mathf.Lerp(height, heightToGo, Time.deltaTime / 1);
                 if (height >= (heightToGo - heightReductor))
                 {
                     height = heightToGo;
                 }
 
-                GrowAnimPosition();
+                GrowAnimPosition(heightToGo);
             }
-        }
-        else
-        {
-            Debug.Log("Altura más grande que la nueva");
-            while (height != heightToGo)
+            else
             {
-                Debug.Log("Altura a llegar: " + heightToGo);
-                Debug.Log("Altura Actual: " + height);
-
-                yield return new WaitForEndOfFrame();
+                Debug.Log("Altura más grande que la nueva");
                 height = Mathf.Lerp(height, heightToGo, Time.deltaTime / 1);
                 if (height <= (heightToGo - heightReductor))
                 {
                     height = heightToGo;
                 }
-
-                GrowAnimPosition();
+                GrowAnimPosition(heightToGo);
             }
         }
     }
 
-    private void GrowAnimPosition()
+    private void GrowAnimPosition(float heightToGo)
     {
-        float transformHeight = height / toPositionConverter;
+        float transformHeight = heightToGo / toPositionConverter;
         transform.position = new Vector3(transform.position.x, transform.position.y + (transformHeight), transform.position.z);
     }
 }
