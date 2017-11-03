@@ -4,6 +4,34 @@ using UnityEngine;
 
 public class Show_UI_Gameplay : MonoBehaviour {
 
+    [SerializeField]
+    private GameObject buttonContainer;
+
+    public void Start()
+    {
+        Turn_Manager.OnPlayerTurn += MoveButtons;
+
+        if (buttonContainer == null)
+        {
+            Debug.LogError("No hay Contenedor de botones para show_ui_gameplay");
+        }
+    }
+
+    public void MoveButtons (int currentTurn)
+    {
+
+        if (currentTurn % 2 == 0)
+        {
+            //Jugador 2
+
+        }
+        else
+        {
+            //Jugador 1
+
+        }
+    }
+
 	public static void UpdatePhrases (Phrase_Selector[] _phraseSelector)
     {
 		if (_phraseSelector == null)

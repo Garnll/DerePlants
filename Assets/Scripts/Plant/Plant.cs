@@ -16,6 +16,10 @@ public class Plant : MonoBehaviour {
 
     private GameObject asignedPlayer;
     public float height;
+
+    private bool stop;
+
+    private float animHeight;
     private Personality_Type personalityType;
 
     public int CheckLove(Love_Type phraseLoveType)
@@ -80,52 +84,45 @@ public class Plant : MonoBehaviour {
         return loveReceived;
     }
 
+    /// A partir de aqui esta todo lo necesario para animar la planta
+
     public void Grow(float newHeight)
     {
+        stop = false;
+        animHeight = newHeight;
 
         newHeight = height + newHeight;
 
         height = Mathf.Lerp(height, newHeight, Time.deltaTime / 1); //Esta es la animación
-        StartCoroutine(GrowAnim(newHeight));
+
+        StartCoroutine("GrowAnimPosition");
         
     }
 
-    private IEnumerator GrowAnim(float heightToGo)
+    private void GrowAnim(float heightToGo)
     {
         float heightReductor = heightToGo / 10;
-        while (height != heightToGo)
+        
+        height = heightToGo;
+        
+    }
+
+    private IEnumerator GrowAnimPosition()
+    {
+        StartCoroutine("Wait");
+
+        while (stop == false)
         {
             yield return new WaitForEndOfFrame();
-            Debug.Log("Altura a llegar: " + heightToGo);
-            Debug.Log("Altura Actual: " + height);
 
-            if (heightToGo >= height)
-            {
-                Debug.Log("Altura más pequeña que la nueva");
-                height = Mathf.Lerp(height, heightToGo, Time.deltaTime / 1);
-                if (height >= (heightToGo - heightReductor))
-                {
-                    height = heightToGo;
-                }
-
-                GrowAnimPosition(heightToGo);
-            }
-            else
-            {
-                Debug.Log("Altura más grande que la nueva");
-                height = Mathf.Lerp(height, heightToGo, Time.deltaTime / 1);
-                if (height <= (heightToGo - heightReductor))
-                {
-                    height = heightToGo;
-                }
-                GrowAnimPosition(heightToGo);
-            }
+            float transformHeight = animHeight / toPositionConverter;
+            transform.position = new Vector3(transform.position.x, (transform.position.y + (transformHeight)), transform.position.z);
         }
     }
 
-    private void GrowAnimPosition(float heightToGo)
+    private IEnumerator Wait()
     {
-        float transformHeight = heightToGo / toPositionConverter;
-        transform.position = new Vector3(transform.position.x, transform.position.y + (transformHeight), transform.position.z);
+        yield return new WaitForSeconds(1);
+        stop = true;
     }
 }

@@ -25,8 +25,6 @@ public class Plant_Controller : MonoBehaviour {
     {
         growmultiplicator = plants[0].CheckLove(phrase.loveType);
 
-        Debug.Log(phrase.myPhrase);
-
         int newHeight = phrase.love * growmultiplicator;
 
         ReceiveHeight(newHeight);
