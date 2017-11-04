@@ -7,7 +7,12 @@ public class Turn_Manager : MonoBehaviour {
 	public const int TOTAL_TURNS = 20;
 	public float TURN_TIME = 20f;
 
+	//Arreglo con los GameObjects de los jugadores que están en la escena.
+	public GameObject[] gameplayers = new GameObject[2];
+
+	//Arreglo con los Players dentro de los GameObjects de los jugadores de la escena.
 	public Player[] players = new Player[2];
+	
 	Player currentPlayer;
 	int currentTurn;
 
@@ -24,6 +29,29 @@ public class Turn_Manager : MonoBehaviour {
 	void Start () {
 		startTurns();
 		StartCoroutine("turn");
+
+		for (int i = 0; i < players.Length; i++) {
+			Debug.Log(" El jugador #" + (players[i].id) + " es un " + players[i].behaviour.getTypeBehaviour() + ".");
+		}
+	}
+
+	void startTurns() {
+		currentTurn = 1;
+		findPlayers();
+		activatePlayer(players[0]);
+		OnTurnSystemStarted();
+	}
+
+	void findPlayers() {
+		gameplayers[0] = GameObject.FindWithTag("Player1");
+		gameplayers[1] = GameObject.FindWithTag("Player2");
+		players = new Player[gameplayers.Length];
+		PlayerGameObject[] playerGameObjects = new PlayerGameObject[gameplayers.Length];
+
+		for (int i = 0; i < players.Length; i++) {
+			playerGameObjects[i] = gameplayers[i].GetComponent<PlayerGameObject>();
+			players[i] = playerGameObjects[i].player;
+		}
 	}
 
 	IEnumerator turn() {
@@ -34,17 +62,6 @@ public class Turn_Manager : MonoBehaviour {
         else{
             OnTurnSystemFinished();
         }
-	}
-
-	void startTurns() {
-		currentTurn = 1;
-
-		players[0] = new Player(1, new HumanBehaviour());
-		players[1] = new Player(2, new CpuBehaviour());
-
-		activatePlayer(players[0]);
-
-		OnTurnSystemStarted();
 	}
 
 	void activatePlayer(Player player) {

@@ -12,5 +12,7 @@ public interface IBehaviour {
 
 	void useItem(Item i);
 
+	string getTypeBehaviour();
+
 }
 

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class HumanBehaviour : IBehaviour {
 
+	public string type = "Humano";
+
 	public void act() {
 
 	}
@@ -18,5 +20,9 @@ public class HumanBehaviour : IBehaviour {
 
 	public void useItem(Item i) {
 
+	}
+
+	public string getTypeBehaviour() {
+		return type;
 	}
 }
