@@ -6,7 +6,8 @@ public class Player {
 
 	public int id;
 	public bool onTurn;
-	IBehaviour behaviour;
+	public IBehaviour behaviour;
+	public int score;
 
 	public Player(int i, IBehaviour b) {
 		id = i;
