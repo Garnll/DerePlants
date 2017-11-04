@@ -6,6 +6,7 @@ public class Show_UI_Gameplay : MonoBehaviour {
 
     [SerializeField]
     private GameObject buttonContainer;
+    private float positionForButtonContainer;
 
     public void Start()
     {
@@ -15,20 +16,25 @@ public class Show_UI_Gameplay : MonoBehaviour {
         {
             Debug.LogError("No hay Contenedor de botones para show_ui_gameplay");
         }
+        else
+        {
+            positionForButtonContainer = buttonContainer.transform.localPosition.x;
+        }
+
     }
 
     public void MoveButtons (int currentTurn)
     {
-
+        
         if (currentTurn % 2 == 0)
         {
             //Jugador 2
-
+            buttonContainer.transform.localPosition = new Vector3(-positionForButtonContainer, buttonContainer.transform.localPosition.y, buttonContainer.transform.localPosition.z);
         }
         else
         {
             //Jugador 1
-
+            buttonContainer.transform.localPosition = new Vector3(positionForButtonContainer, buttonContainer.transform.localPosition.y, buttonContainer.transform.localPosition.z);
         }
     }
 
