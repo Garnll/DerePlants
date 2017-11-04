@@ -11,6 +11,11 @@ public class Plant : MonoBehaviour {
         tsundere, yandere
     }
 
+    public delegate void AnimationOcurrences();
+    public static event AnimationOcurrences OnPlantMovementEnded;
+    public static event AnimationOcurrences OnPlantMovementStarted;
+
+
     [SerializeField]
     private float toPositionConverter = 100000000000000000000000f;
 
@@ -109,6 +114,10 @@ public class Plant : MonoBehaviour {
 
     private IEnumerator GrowAnimPosition()
     {
+        if (OnPlantMovementStarted != null)
+        {
+            OnPlantMovementStarted(); //Por si se necesita
+        }
         StartCoroutine("Wait");
 
         while (stop == false)
@@ -124,5 +133,9 @@ public class Plant : MonoBehaviour {
     {
         yield return new WaitForSeconds(1);
         stop = true;
+        if (OnPlantMovementEnded != null)
+        {
+            OnPlantMovementEnded(); //Se planea enviar a Turn Manager (switchTurn())
+        }
     }
 }

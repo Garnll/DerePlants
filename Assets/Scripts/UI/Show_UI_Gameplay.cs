@@ -10,7 +10,7 @@ public class Show_UI_Gameplay : MonoBehaviour {
 
     public void Start()
     {
-        Turn_Manager.OnPlayerTurn += MoveButtons;
+        Turn_Manager.OnTurnChanged += MoveButtons;
 
         if (buttonContainer == null)
         {
@@ -23,9 +23,15 @@ public class Show_UI_Gameplay : MonoBehaviour {
 
     }
 
+    public void OnDestroy()
+    {
+        Turn_Manager.OnTurnChanged -= MoveButtons;
+    }
+
     public void MoveButtons (int currentTurn)
     {
-        
+        ShowButtons();
+
         if (currentTurn % 2 == 0)
         {
             //Jugador 2
@@ -60,4 +66,14 @@ public class Show_UI_Gameplay : MonoBehaviour {
         }
 
 	}
+
+    public void HideButtons ()
+    {
+        buttonContainer.gameObject.SetActive(false);
+    }
+
+    public void ShowButtons()
+    {
+        buttonContainer.gameObject.SetActive(true);
+    }
 }

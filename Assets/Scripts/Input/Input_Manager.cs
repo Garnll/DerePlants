@@ -22,6 +22,8 @@ public class Input_Manager : MonoBehaviour {
 
     [SerializeField]
     private Button[] phrasesButtons;
+    [SerializeField]
+    private Show_UI_Gameplay showUI;
 
     //Cosasa temporales. Eliminar cuando se haga bien
     [SerializeField]
@@ -53,6 +55,12 @@ public class Input_Manager : MonoBehaviour {
             plantController = FindObjectOfType<Plant_Controller>(); //temp
         }
 
+        if (showUI == null)
+        {
+            showUI = FindObjectOfType<Show_UI_Gameplay>(); //No se si temp
+        }
+
+
         for (int i = 0; i < phrasesButtons.Length; i++)
         {
             int temp = i;
@@ -62,8 +70,9 @@ public class Input_Manager : MonoBehaviour {
 
     public void ButtonPressed(Phrase_Selector phraseSelectorInButton)
     {
+        showUI.HideButtons();
         plantController.ReceiveLove(phraseSelectorInButton.chosenPhrase); //Más temporal que tu p
 
-        turnManager.switchTurn(); //Temporal (se finalizará el turno al hacer animaciones
+        turnManager.stopTurns(); //Temporal
     }
 }
