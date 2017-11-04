@@ -200,7 +200,7 @@ GameObject:
   - component: {fileID: 116924571}
   m_Layer: 0
   m_Name: Player2GameObject
-  m_TagString: Untagged
+  m_TagString: Player2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -845,6 +845,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TURN_TIME: 20
+  gameplayers:
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!4 &1177857850
 Transform:
   m_ObjectHideFlags: 0
@@ -1049,7 +1052,7 @@ GameObject:
   - component: {fileID: 1424270758}
   m_Layer: 0
   m_Name: Player1GameObject
-  m_TagString: Untagged
+  m_TagString: Player1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1893,5 +1896,6 @@ MonoBehaviour:
   - {fileID: 529485004}
   - {fileID: 414332797}
   - {fileID: 1645554822}
+  showUI: {fileID: 0}
   turnManager: {fileID: 0}
   plantController: {fileID: 0}

@@ -30,6 +30,8 @@ public class Turn_Manager : MonoBehaviour {
 		startTurns();
 		StartCoroutine("turn");
 
+        Plant.OnPlantMovementEnded += switchTurn;
+
 		for (int i = 0; i < players.Length; i++) {
 			Debug.Log(" El jugador #" + (players[i].id) + " es un " + players[i].behaviour.getTypeBehaviour() + ".");
 		}
@@ -95,7 +97,7 @@ public class Turn_Manager : MonoBehaviour {
         StartCoroutine("turn"); //Se vuelve a llamar la corrutina para que no funcione unicamente en loop y se pueda cancelar al hundir un botón
     }
 
-    public void stopCoroutine()
+    public void stopTurns()
     {
         StopCoroutine("turn");//Se para la corrutina para que no funcione unicamente en loop y se pueda cancelar al hundir un botón
     }
