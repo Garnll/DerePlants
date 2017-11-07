@@ -1,11 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Show_UI_Gameplay : MonoBehaviour {
 
     [SerializeField]
     private GameObject buttonContainer;
+    [SerializeField]
+    private Text roundText;
+
+
     private float positionForButtonContainer;
 
     public void Start()
