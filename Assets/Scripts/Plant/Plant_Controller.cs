@@ -9,25 +9,46 @@ public class Plant_Controller : MonoBehaviour {
     /// </summary>
 
     private int growmultiplicator;
-    private Plant[] plants;
+    //private Plant[] plants;
+    [SerializeField]
+    private PlayersController plController;
 
     private void Awake()
     {
-        plants = FindObjectsOfType<Plant>();
+        if (plController == null)
+        {
+            plController = FindObjectOfType<PlayersController>();
+        }
     }
 
-    private void ReceiveHeight(int growThisMuch)
+    private void ReceiveHeight(Plant plantToGrow,int growThisMuch)
     {
-        plants[0].Grow(growThisMuch);
+        plantToGrow.Grow(growThisMuch);
     }
 
     public void ReceiveLove(Phrase phrase)
     {
-        growmultiplicator = plants[0].CheckLove(phrase.loveType);
+        Plant plantToUse = null;
+
+        if (plController.player1.player.onTurn)
+        {
+            plantToUse = plController.player1.plant;
+        }
+        else if (plController.player2.player.onTurn)
+        {
+            plantToUse = plController.player2.plant;
+        }
+        else
+        {
+            Debug.LogError("Somehow neither player is onTurn");
+            return;
+        }
+
+        growmultiplicator = plantToUse.CheckLove(phrase.loveType);
 
         int newHeight = phrase.love * growmultiplicator;
 
-        ReceiveHeight(newHeight);
+        ReceiveHeight(plantToUse, newHeight);
     }
 
     private void ReceivePowerUp()

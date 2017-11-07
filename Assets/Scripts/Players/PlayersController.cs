@@ -5,10 +5,10 @@ using UnityEngine;
 public class PlayersController : MonoBehaviour {
 
 	[SerializeField]
-	PlayerGameObject player1;
+	public PlayerGameObject player1;
 
 	[SerializeField]
-	PlayerGameObject player2;
+	public PlayerGameObject player2;
 
 	private void Start() {
 		player1.player = new Player(1, new HumanBehaviour());

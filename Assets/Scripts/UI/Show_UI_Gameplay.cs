@@ -9,13 +9,27 @@ public class Show_UI_Gameplay : MonoBehaviour {
     private GameObject buttonContainer;
     [SerializeField]
     private Text roundText;
-
+    [SerializeField]
+    private Image timerImage;
 
     private float positionForButtonContainer;
+    private int currentRound = 0;
 
-    public void Start()
+    private float maxTime;
+    private float turnTime;
+
+    private void Awake()
     {
+        Turn_Manager.OnTimeStarts += UpdateTimer;
         Turn_Manager.OnTurnChanged += MoveButtons;
+        Turn_Manager.OnPlayerTurn += UpdateRoundText;
+        Turn_Manager.OnTurnSystemFinished += FinishUI;
+    }
+
+    private void Start()
+    {
+        //currentRound = 1;
+        roundText.text = "Round " + currentRound;
 
         if (buttonContainer == null)
         {
@@ -31,6 +45,9 @@ public class Show_UI_Gameplay : MonoBehaviour {
     public void OnDestroy()
     {
         Turn_Manager.OnTurnChanged -= MoveButtons;
+        Turn_Manager.OnPlayerTurn -= UpdateRoundText;
+        Turn_Manager.OnTurnSystemFinished -= FinishUI;
+        Turn_Manager.OnTimeStarts -= UpdateTimer;
     }
 
     public void MoveButtons (int currentTurn)
@@ -47,6 +64,21 @@ public class Show_UI_Gameplay : MonoBehaviour {
             //Jugador 1
             buttonContainer.transform.localPosition = new Vector3(positionForButtonContainer, buttonContainer.transform.localPosition.y, buttonContainer.transform.localPosition.z);
         }
+    }
+
+    private void UpdateRoundText(int currentTurn)
+    {
+        if (currentTurn % 2 != 0)
+        {
+            currentRound++;
+            roundText.text = "Round " + currentRound;
+        }
+    }
+
+    private void UpdateRoundText()
+    {
+        currentRound = 1;
+        roundText.text = "Finished!";
     }
 
 	public static void UpdatePhrases (Phrase_Selector[] _phraseSelector)
@@ -72,13 +104,53 @@ public class Show_UI_Gameplay : MonoBehaviour {
 
 	}
 
+    private void UpdateTimer(float maxTime)
+    {
+        CancelInvoke("UpdateTimer");
+        this.maxTime = maxTime;
+
+        turnTime = maxTime;
+        timerImage.fillAmount = turnTime / this.maxTime;
+        InvokeRepeating("UpdateTimer", Time.fixedDeltaTime, Time.fixedDeltaTime);
+    }
+
+    private void UpdateTimer()
+    {
+        turnTime -= Time.fixedDeltaTime;
+        timerImage.fillAmount = turnTime / maxTime;
+
+        if (turnTime < 0)
+        {
+            CancelInvoke("UpdateTimer");
+        }
+    }
+
+    private void StopTimer()
+    {
+        CancelInvoke("UpdateTimer");
+    }
+
+    private void HideTimer()
+    {
+        StopTimer();
+        timerImage.gameObject.SetActive(false);
+    }
+
     public void HideButtons ()
     {
+        StopTimer();
         buttonContainer.gameObject.SetActive(false);
     }
 
     public void ShowButtons()
     {
         buttonContainer.gameObject.SetActive(true);
+    }
+
+    private void FinishUI()
+    {
+        HideTimer();
+        HideButtons();
+        UpdateRoundText();
     }
 }

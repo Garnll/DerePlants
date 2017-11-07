@@ -25,8 +25,10 @@ public class Turn_Manager : MonoBehaviour {
 	public static event SpecificTurnEvent OnTurnChanged;
 	public static event SpecificTurnEvent OnPlayerTurn;
 
+    public delegate void TimedTurnEvent(float turnTime);
+    public static event TimedTurnEvent OnTimeStarts;
 
-	void Start () {
+    void Start () {
 		startTurns();
 		StartCoroutine("turn");
 
@@ -57,7 +59,7 @@ public class Turn_Manager : MonoBehaviour {
 	}
 
 	IEnumerator turn() {
-        if (currentTurn < TOTAL_TURNS){
+        if (currentTurn <= TOTAL_TURNS){
             yield return new WaitForSeconds(TURN_TIME);
             switchTurn();
         }
@@ -72,14 +74,20 @@ public class Turn_Manager : MonoBehaviour {
         OnPlayerTurn(currentTurn);
         OnTurnStarted();
         currentPlayer.activate();
-		//Debug.Log("Turn " + currentTurn + ", Player " + currentPlayer.id + " at " + Time.time + ".");
-	}
+
+        if (OnTimeStarts != null)
+        {
+            OnTimeStarts(TURN_TIME);
+        }
+        //Debug.Log("Turn " + currentTurn + ", Player " + currentPlayer.id + " at " + Time.time + ".");
+    }
 
     //Lo puse publico para poder usarlo desde el onClick de los botones
 	public void switchTurn() {
 
         //Esto evita que al pasar de TOTAL_TURNS, al accionar los botones siga intentano cambiar de turno
         if (currentTurn >= TOTAL_TURNS){
+            OnTurnSystemFinished();
             return;
         }
         StopCoroutine("turn");//Se para la corrutina para que no funcione unicamente en loop y se pueda cancelar al hundir un botón
