@@ -1,21 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class Menu_Controller : MonoBehaviour {
 
-    public string scene1, scene2, scene3;
-
+    public string local, multiplayer, singleplayer, highscore;
+    //public string[] sceneNames;
 
 	// Use this for initialization
 	void Start () {
 		
 	}
 	
-    void PassScene()
+    public void PassScene()
     {
-      
+        string name = EventSystem.current.currentSelectedGameObject.name;
+
+        if (name == "Button.Local")
+            SceneManager.LoadScene(local);
+        if (name == "Button.Multiplayer")
+            SceneManager.LoadScene(multiplayer);
+        if (name == "Button.Singleplayer")
+            SceneManager.LoadScene(singleplayer);
+        if (name == "Button.Highscore")
+            SceneManager.LoadScene(highscore);
 
     }
 
