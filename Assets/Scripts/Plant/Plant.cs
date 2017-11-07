@@ -17,7 +17,7 @@ public class Plant : MonoBehaviour {
 
 
     [SerializeField]
-    private float toPositionConverter = 100000000000000000000000f;
+    private float toPositionConverter = 100f;
 
     private GameObject asignedPlayer;
     public float height;
@@ -98,7 +98,7 @@ public class Plant : MonoBehaviour {
 
         newHeight = height + newHeight;
 
-        height = Mathf.Lerp(height, newHeight, Time.deltaTime / 1); //Esta es la animación
+		height = newHeight;
 
         StartCoroutine("GrowAnimPosition");
         
