@@ -75,4 +75,17 @@ public class Input_Manager : MonoBehaviour {
 
         turnManager.stopTurns(); //Temporal
     }
+
+    public void PressButton(int whichOne)
+    {
+        phrasesButtons[whichOne].Select();
+    }
+
+    public int ButtonNumber
+    {
+        get
+        {
+            return phrasesButtons.Length;
+        }
+    }
 }

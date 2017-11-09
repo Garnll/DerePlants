@@ -14,7 +14,7 @@ public class WeatherManager : MonoBehaviour {
 	// Maximum times the neutral weather can appear to a player in a session:
 	const int MAX_TIMES_WEATHER0 = 5;
 
-	Weather[] weathers;
+	public Weather[] weathers;
 
 	enum WeatherName				{ Spring, Summer, Autumn, Winter};
 	int[] magnitudes = new int[]	{ 0,	  4,	  3,	  5		};

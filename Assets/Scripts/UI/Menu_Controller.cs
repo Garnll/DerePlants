@@ -8,29 +8,31 @@ public class Menu_Controller : MonoBehaviour {
 
     public string local, multiplayer, singleplayer, highscore;
     //public string[] sceneNames;
-
-	// Use this for initialization
-	void Start () {
-		
-	}
 	
     public void PassScene()
     {
         string name = EventSystem.current.currentSelectedGameObject.name;
 
         if (name == "Button.Local")
+        {
+            TypeOfParameter.Instance.currentPlayType = TypeOfParameter.Parameter.local;
             SceneManager.LoadScene(local);
+        }
+
         if (name == "Button.Multiplayer")
+        {
+            TypeOfParameter.Instance.currentPlayType = TypeOfParameter.Parameter.network;
             SceneManager.LoadScene(multiplayer);
+        }
+
         if (name == "Button.Singleplayer")
+        {
+            TypeOfParameter.Instance.currentPlayType = TypeOfParameter.Parameter.single;
             SceneManager.LoadScene(singleplayer);
+        }
+
         if (name == "Button.Highscore")
             SceneManager.LoadScene(highscore);
 
     }
-
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

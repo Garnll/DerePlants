@@ -60,6 +60,9 @@ public class Turn_Manager : MonoBehaviour {
 
 	IEnumerator turn() {
         if (currentTurn <= TOTAL_TURNS){
+
+            currentPlayer.act();
+
             yield return new WaitForSeconds(TURN_TIME);
             switchTurn();
         }
