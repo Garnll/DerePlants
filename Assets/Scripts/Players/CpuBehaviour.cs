@@ -32,6 +32,7 @@ public class CpuBehaviour : IBehaviour {
 	public void giveLove() {
         int buttonToPress = Random.Range(0, inputManager.ButtonNumber);
 
+        inputManager.StopCoroutine(inputManager.PressButton(buttonToPress));
         inputManager.StartCoroutine(inputManager.PressButton(buttonToPress));
 	}
 
