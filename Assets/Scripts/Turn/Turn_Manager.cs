@@ -21,6 +21,9 @@ public class Turn_Manager : MonoBehaviour {
 	public static event TurnManagerEvent OnTurnSystemFinished;
 	public static event TurnManagerEvent OnTurnStarted;
 
+    public delegate void PlayerHasWonEvent(int playerID, float heightScore);
+    public static event PlayerHasWonEvent OnGameFinished;
+
 	public delegate void SpecificTurnEvent(int turn);
 	public static event SpecificTurnEvent OnTurnChanged;
 	public static event SpecificTurnEvent OnPlayerTurn;
@@ -70,6 +73,7 @@ public class Turn_Manager : MonoBehaviour {
         }
         else{
             OnTurnSystemFinished();
+            OnGameFinished(currentPlayer.id, currentPlayer.score);
         }
 	}
 
@@ -99,6 +103,7 @@ public class Turn_Manager : MonoBehaviour {
         //Esto evita que al pasar de TOTAL_TURNS, al accionar los botones siga intentano cambiar de turno
         if (currentTurn >= TOTAL_TURNS){
             OnTurnSystemFinished();
+            OnGameFinished(currentPlayer.id, currentPlayer.score);
             return;
         }
         StopCoroutine("turn");//Se para la corrutina para que no funcione unicamente en loop y se pueda cancelar al hundir un botón
