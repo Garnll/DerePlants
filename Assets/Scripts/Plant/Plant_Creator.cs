@@ -13,17 +13,17 @@ public class Plant_Creator : MonoBehaviour{
 	enum PlantPersonality { Tsundere, Normie }
 	string[] personalityNames;
 
+	
 	void Start() {
 		fillPersonalities();
 	}
 
-	public Graphical_Plant newRandomPlant() {
-		Graphical_Plant seed = new Graphical_Plant();
-		seed.sow();
-		seed.head.sprite = heads[randomIndexOf(heads)];
-		seed.stem.sprite = stems[randomIndexOf(stems)];
-		seed.personality.name = personalityNames[randomIndexOf(personalityNames)];
-		return seed;
+	public Seed newRandomPlant() {
+		Sprite randomHead = heads[randomIndexOf(heads)];
+		Sprite randomStem = stems[randomIndexOf(stems)];
+		string randomPersonality = personalityNames[randomIndexOf(personalityNames)];
+		Debug.Log(randomHead.name + " + " + randomStem.name + " + " + randomPersonality);
+		return new Seed(randomPersonality, randomHead, randomStem);
 	}
 
 	void fillPersonalities() {
@@ -31,14 +31,16 @@ public class Plant_Creator : MonoBehaviour{
 	}
 
 	int randomIndexOf(Sprite[] array) {
-		int rand = Random.Range(0, array.Length - 1);
+		int rand = Random.Range(0, array.Length);
 		return rand;
 	}
 
 	int randomIndexOf(string[] array) {
-		int rand = Random.Range(0, array.Length - 1);
+		int rand = Random.Range(0, array.Length);
 		return rand;
 	}
+
+
 
 
 }

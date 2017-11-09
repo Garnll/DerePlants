@@ -9,7 +9,9 @@ public class Plant_Controller : MonoBehaviour {
     /// </summary>
 
     private int growmultiplicator;
+
     //private Plant[] plants;
+
     [SerializeField]
     private PlayersController plController;
 
