@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class Plant : MonoBehaviour {
 
-    ///Probably All of this is temp
+	///Probably All of this is temp
+	///
+
+	[SerializeField]
+	private int id;
 
     enum Personality_Type
     {
@@ -15,6 +19,11 @@ public class Plant : MonoBehaviour {
     public static event AnimationOcurrences OnPlantMovementEnded;
     public static event AnimationOcurrences OnPlantMovementStarted;
 
+	public Seed seed;
+	private Plant_Creator creator;
+	private GameObject face;
+	private GameObject head;
+	private GameObject stem;
 
     [SerializeField]
     private float toPositionConverter = 100f;
@@ -27,7 +36,7 @@ public class Plant : MonoBehaviour {
     private float animHeight;
     private Personality_Type personalityType;
 
-    public int CheckLove(Love_Type phraseLoveType)
+	public int CheckLove(Love_Type phraseLoveType)
     {
         int loveReceived = 0;
         Debug.Log(personalityType);
@@ -89,9 +98,27 @@ public class Plant : MonoBehaviour {
         return loveReceived;
     }
 
-    /// A partir de aqui esta todo lo necesario para animar la planta
+	private void Start() {
+		GameObject creatorObject = GameObject.FindGameObjectWithTag("PlantCreator");
+		creator = creatorObject.GetComponent<Plant_Creator>();
 
-    public void Grow(float newHeight)
+		seed = creator.newRandomPlant();
+
+		face = GameObject.FindGameObjectWithTag("Face" + id);
+		head = GameObject.FindGameObjectWithTag("Head" + id);
+		stem = GameObject.FindGameObjectWithTag("Stem" + id);
+
+		head.GetComponent<SpriteRenderer>().sprite = seed.head;
+		stem.GetComponent<SpriteRenderer>().sprite = seed.stem;
+		
+	}
+
+
+
+
+	/// A partir de aqui esta todo lo necesario para animar la planta
+
+	public void Grow(float newHeight)
     {
         stop = false;
         animHeight = newHeight;

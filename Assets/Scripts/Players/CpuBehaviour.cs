@@ -4,14 +4,35 @@ using UnityEngine;
 
 public class CpuBehaviour : IBehaviour {
 
+    private Input_Manager inputManager;
+    private WeatherManager wheaterManager;
+
 	public string type = "Cpu";
 
 	public void act() {
+        if (inputManager == null)
+        {
+            inputManager = Input_Manager.Instance();
+        }
+        if (wheaterManager == null)
+        {
+            wheaterManager = GameObject.FindObjectOfType<WeatherManager>();
+        }
 
-	}
+        if (wheaterManager.currentWeather != wheaterManager.weathers[0])
+        {
+            giveLove();
+        }
+        else
+        {
+            input(); //Hará la selección del objeto según el clima
+        }
 
+    }
 	public void giveLove() {
+        int buttonToPress = Random.Range(0, inputManager.ButtonNumber);
 
+        inputManager.StartCoroutine(inputManager.PressButton(buttonToPress));
 	}
 
 	public void input() {

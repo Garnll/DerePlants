@@ -6,6 +6,13 @@ TagManager:
   tags:
   - Player1
   - Player2
+  - PlantCreator
+  - Face1
+  - Head1
+  - Stem1
+  - Face2
+  - Head2
+  - Stem2
   layers:
   - Default
   - TransparentFX
