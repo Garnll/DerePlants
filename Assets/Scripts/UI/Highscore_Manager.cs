@@ -8,11 +8,32 @@ public class Highscore_Manager : MonoBehaviour {
     public float newHeight, oldHeight;
     public string newName, oldName;
     public Turn_Manager currentTurn;
+    public Animator hsAnim;
 
     [SerializeField]
-    private Text name;
+    private Text name, playerWin, heightWin;
 
- 
+
+    private void Start()
+    {
+        Turn_Manager.OnTurnSystemFinished += HighScoreAnim;
+        Turn_Manager.OnGameFinished += ChangeNameHeight;
+
+
+    }
+
+    private void HighScoreAnim()
+    {
+        //hsAnim.Play("HighscoreFinishDrop");
+        hsAnim.SetBool("Finished", true);
+    }
+
+    private void ChangeNameHeight(int ID, float score)
+    {
+        playerWin.text = "Player " + ID.ToString() + " won";
+        heightWin.text = "Height: " + score.ToString("F");
+
+    }
 
     public void AddName()
     {
