@@ -4,16 +4,10 @@ using UnityEngine;
 
 public class Plant : MonoBehaviour {
 
-	///Probably All of this is temp
-	///
-
 	[SerializeField]
 	private int id;
 
-    enum Personality_Type
-    {
-        tsundere, yandere
-    }
+    enum Personality_Type { tsundere, normie }
 
     public delegate void AnimationOcurrences();
     public static event AnimationOcurrences OnPlantMovementEnded;
@@ -39,7 +33,7 @@ public class Plant : MonoBehaviour {
 	public int CheckLove(Love_Type phraseLoveType)
     {
         int loveReceived = 0;
-        Debug.Log(personalityType);
+        //Debug.Log(personalityType);
 
         switch (personalityType)
         {
@@ -69,7 +63,7 @@ public class Plant : MonoBehaviour {
 
                 break;
 
-            case Personality_Type.yandere:
+            case Personality_Type.normie:
                 switch (phraseLoveType)
                 {
                     case Love_Type.kind:
@@ -110,11 +104,18 @@ public class Plant : MonoBehaviour {
 
 		head.GetComponent<SpriteRenderer>().sprite = seed.head;
 		stem.GetComponent<SpriteRenderer>().sprite = seed.stem;
-		
+
+		switch (seed.personality) {
+			case ("Tsundere"):
+				personalityType = Personality_Type.tsundere;
+				break;
+			case ("Normie"):
+				personalityType = Personality_Type.normie;
+				break;
+		}
+
+		Debug.Log("Debe ser " + personalityType);
 	}
-
-
-
 
 	/// A partir de aqui esta todo lo necesario para animar la planta
 
