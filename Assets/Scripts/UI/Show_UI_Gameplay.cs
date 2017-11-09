@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,6 +12,8 @@ public class Show_UI_Gameplay : MonoBehaviour {
     private Text roundText;
     [SerializeField]
     private Image timerImage;
+    [SerializeField]
+    private Image stopperImage;
 
     private float positionForButtonContainer;
     private int currentRound = 0;
@@ -30,6 +33,7 @@ public class Show_UI_Gameplay : MonoBehaviour {
     {
         //currentRound = 1;
         roundText.text = "Round " + currentRound;
+        stopperImage.gameObject.SetActive(false);
 
         if (buttonContainer == null)
         {
@@ -63,6 +67,38 @@ public class Show_UI_Gameplay : MonoBehaviour {
         {
             //Jugador 1
             buttonContainer.transform.localPosition = new Vector3(positionForButtonContainer, buttonContainer.transform.localPosition.y, buttonContainer.transform.localPosition.z);
+        }
+
+        StopPlayerFromTouchingButtons(currentTurn);
+    }
+
+    private void StopPlayerFromTouchingButtons(int currentTurn)
+    {
+        switch (TypeOfParameter.Instance.currentPlayType)
+        {
+            case (TypeOfParameter.Parameter.local):
+
+                break;
+
+            case (TypeOfParameter.Parameter.network):
+                break;
+
+            case (TypeOfParameter.Parameter.single):
+                if (currentTurn % 2 == 0)
+                {
+                    //Jugador 2
+                    stopperImage.transform.position = buttonContainer.transform.position;
+                    stopperImage.gameObject.SetActive(true);
+                }
+                else
+                {
+                    //Jugador 1
+                    stopperImage.gameObject.SetActive(false);
+                }
+                break;
+
+            default:
+                break;
         }
     }
 

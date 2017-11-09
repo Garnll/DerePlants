@@ -31,14 +31,17 @@ public class CpuBehaviour : IBehaviour {
     }
 	public void giveLove() {
         int buttonToPress = Random.Range(0, inputManager.ButtonNumber);
+        Debug.Log("cpu actuando");
 
-        inputManager.StopCoroutine(inputManager.PressButton(buttonToPress));
+        //inputManager.StopCoroutine(inputManager.PressButton(buttonToPress));
+
         inputManager.StartCoroutine(inputManager.PressButton(buttonToPress));
 	}
 
 	public void input() {
-
-	}
+        Debug.Log("cpu actuando en input");
+        giveLove(); //momentarily
+    }
 
 	public void useItem(Item i) {
 

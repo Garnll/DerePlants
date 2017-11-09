@@ -21,10 +21,11 @@ public class TypeOfParameter  {
 
     public enum Parameter
     {
+        single,
         network,
-        local,
-        single
+        local
+
     }
 
-    public Parameter currentPlayType;
+    public Parameter currentPlayType = Parameter.single;
 }

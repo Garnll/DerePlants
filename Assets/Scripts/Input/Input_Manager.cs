@@ -82,6 +82,7 @@ public class Input_Manager : MonoBehaviour {
 
         yield return new WaitForSeconds(1);
         ButtonPressed(phrasesButtons[whichOne].GetComponent<Phrase_Selector>());
+        Debug.Log("Button has been pressed by the EA");
     }
 
 
