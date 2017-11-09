@@ -198,7 +198,11 @@ MonoBehaviour:
   oldHeight: 0
   newName: 
   oldName: 
+  currentTurn: {fileID: 0}
+  hsAnim: {fileID: 2025924581}
   name: {fileID: 873225604}
+  playerWin: {fileID: 1640993156}
+  heightWin: {fileID: 1765392863}
 --- !u!1 &100726358
 GameObject:
   m_ObjectHideFlags: 0
@@ -1119,6 +1123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61d223685424bca4088620fad2a39e36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   toPositionConverter: 1000
   height: 0
 --- !u!1 &1078347417
@@ -1791,6 +1796,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61d223685424bca4088620fad2a39e36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   toPositionConverter: 1000
   height: 0
 --- !u!1 &1627553715
@@ -2496,7 +2502,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 16612215}
-        m_MethodName: AddScore
+        m_MethodName: AddName
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3043,7 +3049,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -1091}
+  m_AnchoredPosition: {x: 0, y: -139}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &2025924581
