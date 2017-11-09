@@ -61,7 +61,9 @@ public class Turn_Manager : MonoBehaviour {
 	IEnumerator turn() {
         if (currentTurn <= TOTAL_TURNS){
 
-            currentPlayer.act();
+            StopCoroutine(waitToAct(0));
+            int waitTime = (int)Random.Range(1f, TURN_TIME / 2);
+            StartCoroutine(waitToAct(waitTime));
 
             yield return new WaitForSeconds(TURN_TIME);
             switchTurn();
@@ -70,6 +72,12 @@ public class Turn_Manager : MonoBehaviour {
             OnTurnSystemFinished();
         }
 	}
+
+    IEnumerator waitToAct(int howMuch)
+    {
+        yield return new WaitForSeconds(howMuch);
+        currentPlayer.act();
+    }
 
 	void activatePlayer(Player player) {
 		try { currentPlayer.deactivate(); } catch { }

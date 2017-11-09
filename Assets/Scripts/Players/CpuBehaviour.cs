@@ -28,11 +28,11 @@ public class CpuBehaviour : IBehaviour {
             input(); //Hará la selección del objeto según el clima
         }
 
-	}
-
+    }
 	public void giveLove() {
         int buttonToPress = Random.Range(0, inputManager.ButtonNumber);
 
+        inputManager.StartCoroutine(inputManager.PressButton(buttonToPress));
 	}
 
 	public void input() {
