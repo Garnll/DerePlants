@@ -32,6 +32,7 @@ public class Turn_Manager : MonoBehaviour {
     public static event TimedTurnEvent OnTimeStarts;
 
     void Start () {
+		currentTurn = 1;
 		startTurns();
 		StartCoroutine("turn");
 
@@ -40,6 +41,10 @@ public class Turn_Manager : MonoBehaviour {
 		for (int i = 0; i < players.Length; i++) {
 			Debug.Log(" El jugador #" + (players[i].id) + " es un " + players[i].behaviour.getTypeBehaviour() + ".");
 		}
+	}
+
+	void OnDestroy(){
+		Plant.OnPlantMovementEnded -= switchTurn;
 	}
 
 	void startTurns() {

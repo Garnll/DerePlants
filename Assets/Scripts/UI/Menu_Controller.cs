@@ -3,10 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class Menu_Controller : MonoBehaviour {
 
-    public string local, host, join,  singleplayer, highscore;
+	public string local, host, join, singleplayer;
+	public Animator highscoreAnimator;
+
+	public Text[] listOfRanks;
+
+
+	public void HighscoreAnim() {
+
+		setRanks ();
+
+		highscoreAnimator.SetBool("HighscoreUp", !highscoreAnimator.GetBool("HighscoreUp")); 
+		highscoreAnimator.SetTrigger ("TriggerAnim");
+	}
+
+	public void setRanks() {
+		for (int i = 0; i < listOfRanks.Length; i++) {
+			listOfRanks[i].text = string.Format("{0}: {1}",PlayerPrefs.GetString(i + "HScoreName"), PlayerPrefs.GetInt(i + "HScore"));
+		}
+	
+	
+	}
     //public string[] sceneNames;
 	
     public void PassScene()
@@ -37,8 +58,8 @@ public class Menu_Controller : MonoBehaviour {
             SceneManager.LoadScene(singleplayer);
         }
 
-        if (name == "Button.Highscore")
-            SceneManager.LoadScene(highscore);
+		if (name == "Button.Highscore")
+			HighscoreAnim ();
 
     }
 }
