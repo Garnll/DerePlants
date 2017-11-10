@@ -14,23 +14,26 @@ public class PlayersController : MonoBehaviour {
 
         Turn_Manager.OnTurnSystemFinished += getFinalHeight;
 
-        player1.player = new Player(1, new HumanBehaviour());
-
         switch (TypeOfParameter.Instance.currentPlayType)
         {
             case (TypeOfParameter.Parameter.local):
+                player1.player = new Player(1, new HumanBehaviour());
                 player2.player = new Player(2, new HumanBehaviour());
                 break;
 
-            //case (TypeOfParameter.Parameter.network):
-            //    //player2.player = new Player(2, new HumanBehaviour()); //Aqui no se qué poner ayuda
-            //    break;
+            case (TypeOfParameter.Parameter.network):
+
+                player1.player = new Player(1, new HumanBehaviour());
+                player2.player = new Player(2, new HumanBehaviour()); //Aqui no se qué poner ayuda
+                break;
 
             case (TypeOfParameter.Parameter.single):
+                player1.player = new Player(1, new HumanBehaviour());
                 player2.player = new Player(2, new CpuBehaviour());
                 break;
 
             default:
+                player1.player = new Player(1, new HumanBehaviour());
                 player2.player = new Player(2, new CpuBehaviour());
                 break;
         }
