@@ -20,15 +20,15 @@ public class Highscore_Manager : MonoBehaviour {
     private void Start()
     {
 		hsAnim.SetBool("Finished", false);
-        Turn_Manager.OnTurnSystemFinished += HighScoreAnim;
-        Turn_Manager.OnGameFinished += ChangeNameHeight;
+        Turn_Manager.EventOnTurnSystemFinished += HighScoreAnim;
+        Turn_Manager.EventOnGameFinished += ChangeNameHeight;
         
     }
 
     private void OnDestroy()
     {
-        Turn_Manager.OnTurnSystemFinished -= HighScoreAnim;
-        Turn_Manager.OnGameFinished -= ChangeNameHeight;
+        Turn_Manager.EventOnTurnSystemFinished -= HighScoreAnim;
+        Turn_Manager.EventOnGameFinished -= ChangeNameHeight;
     }
 
     

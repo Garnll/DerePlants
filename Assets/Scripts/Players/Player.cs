@@ -9,6 +9,8 @@ public class Player {
 	public IBehaviour behaviour;
 	public int score;
 
+    public bool controlled = false;
+
 	public Player(int i, IBehaviour b) {
 		id = i;
 		behaviour = b;

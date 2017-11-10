@@ -3,8 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
-public class Show_UI_Gameplay : MonoBehaviour {
+public class Show_UI_Gameplay : NetworkBehaviour {
 
     [SerializeField]
     private GameObject buttonContainer;
@@ -23,10 +24,10 @@ public class Show_UI_Gameplay : MonoBehaviour {
 
     private void Awake()
     {
-        Turn_Manager.OnTimeStarts += UpdateTimer;
-        Turn_Manager.OnTurnChanged += MoveButtons;
-        Turn_Manager.OnPlayerTurn += UpdateRoundText;
-        Turn_Manager.OnTurnSystemFinished += FinishUI;
+        Turn_Manager.EventOnTimeStarts += UpdateTimer;
+        Turn_Manager.EventOnTurnChanged += MoveButtons;
+        Turn_Manager.EventOnPlayerTurn += UpdateRoundText;
+        Turn_Manager.EventOnTurnSystemFinished += FinishUI;
     }
 
     private void Start()
@@ -48,10 +49,10 @@ public class Show_UI_Gameplay : MonoBehaviour {
 
     public void OnDestroy()
     {
-        Turn_Manager.OnTurnChanged -= MoveButtons;
-        Turn_Manager.OnPlayerTurn -= UpdateRoundText;
-        Turn_Manager.OnTurnSystemFinished -= FinishUI;
-        Turn_Manager.OnTimeStarts -= UpdateTimer;
+        Turn_Manager.EventOnTurnChanged -= MoveButtons;
+        Turn_Manager.EventOnPlayerTurn -= UpdateRoundText;
+        Turn_Manager.EventOnTurnSystemFinished -= FinishUI;
+        Turn_Manager.EventOnTimeStarts -= UpdateTimer;
     }
 
     public void MoveButtons (int currentTurn)

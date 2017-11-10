@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
-public class Input_Manager : MonoBehaviour {
+public class Input_Manager : NetworkBehaviour {
 
     //Singleton
     private static Input_Manager inputManager;
@@ -70,6 +71,19 @@ public class Input_Manager : MonoBehaviour {
 
     public void ButtonPressed(Phrase_Selector phraseSelectorInButton)
     {
+        if (TypeOfParameter.Instance.currentPlayType == TypeOfParameter.Parameter.network)
+        {
+            if (GetComponent<NetworkIdentity>() == null)
+            {
+                gameObject.AddComponent<NetworkIdentity>();
+            }
+
+            if (!isLocalPlayer)
+            {
+                //return;
+            }
+        }
+
         showUI.HideButtons();
         plantController.ReceiveLove(phraseSelectorInButton.chosenPhrase); //Más temporal que tu p
 

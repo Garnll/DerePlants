@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class Turn_Manager : MonoBehaviour {
+public class Turn_Manager : NetworkBehaviour {
 
 	public const int TOTAL_TURNS = 20;
 	public float TURN_TIME = 20f;
@@ -17,19 +18,26 @@ public class Turn_Manager : MonoBehaviour {
 	int currentTurn;
 
 	public delegate void TurnManagerEvent();
-	public static event TurnManagerEvent OnTurnSystemStarted;
-	public static event TurnManagerEvent OnTurnSystemFinished;
-	public static event TurnManagerEvent OnTurnStarted;
+    [SyncEvent]
+    public static event TurnManagerEvent EventOnTurnSystemStarted;
+    [SyncEvent]
+    public static event TurnManagerEvent EventOnTurnSystemFinished;
+    [SyncEvent]
+    public static event TurnManagerEvent EventOnTurnStarted;
 
     public delegate void PlayerHasWonEvent(int playerID, float heightScore);
-    public static event PlayerHasWonEvent OnGameFinished;
+    [SyncEvent]
+    public static event PlayerHasWonEvent EventOnGameFinished;
 
 	public delegate void SpecificTurnEvent(int turn);
-	public static event SpecificTurnEvent OnTurnChanged;
-	public static event SpecificTurnEvent OnPlayerTurn;
+    [SyncEvent]
+    public static event SpecificTurnEvent EventOnTurnChanged;
+    [SyncEvent]
+    public static event SpecificTurnEvent EventOnPlayerTurn;
 
     public delegate void TimedTurnEvent(float turnTime);
-    public static event TimedTurnEvent OnTimeStarts;
+    [SyncEvent]
+    public static event TimedTurnEvent EventOnTimeStarts;
 
     void Start () {
 		currentTurn = 1;
@@ -51,7 +59,7 @@ public class Turn_Manager : MonoBehaviour {
 		currentTurn = 1;
 		findPlayers();
 		activatePlayer(players[0]);
-		OnTurnSystemStarted();
+		EventOnTurnSystemStarted();
 	}
 
 	void findPlayers() {
@@ -79,10 +87,10 @@ public class Turn_Manager : MonoBehaviour {
             switchTurn();
         }
         else{
-            OnTurnSystemFinished();
+            EventOnTurnSystemFinished();
 
             Player winner = compareHeights();
-            OnGameFinished(winner.id, winner.score);
+            EventOnGameFinished(winner.id, winner.score);
         }
 	}
 
@@ -96,13 +104,13 @@ public class Turn_Manager : MonoBehaviour {
 	void activatePlayer(Player player) {
 		try { currentPlayer.deactivate(); } catch { }
 		currentPlayer = player;
-        OnPlayerTurn(currentTurn);
-        OnTurnStarted();
+        EventOnPlayerTurn(currentTurn);
+        EventOnTurnStarted();
         currentPlayer.activate();
 
-        if (OnTimeStarts != null)
+        if (EventOnTimeStarts != null)
         {
-            OnTimeStarts(TURN_TIME);
+            EventOnTimeStarts(TURN_TIME);
         }
         //Debug.Log("Turn " + currentTurn + ", Player " + currentPlayer.id + " at " + Time.time + ".");
     }
@@ -112,10 +120,10 @@ public class Turn_Manager : MonoBehaviour {
 
         //Esto evita que al pasar de TOTAL_TURNS, al accionar los botones siga intentano cambiar de turno
         if (currentTurn >= TOTAL_TURNS){
-            OnTurnSystemFinished();
+            EventOnTurnSystemFinished();
 
             Player winner = compareHeights();
-            OnGameFinished(winner.id, winner.score);
+            EventOnGameFinished(winner.id, winner.score);
             return;
         }
         StopCoroutine("turn");//Se para la corrutina para que no funcione unicamente en loop y se pueda cancelar al hundir un botón
@@ -128,7 +136,7 @@ public class Turn_Manager : MonoBehaviour {
 			activatePlayer(players[0]);
 		}
 
-		OnTurnChanged(currentTurn);
+		EventOnTurnChanged(currentTurn);
 
         StartCoroutine("turn"); //Se vuelve a llamar la corrutina para que no funcione unicamente en loop y se pueda cancelar al hundir un botón
     }

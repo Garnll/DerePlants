@@ -41,9 +41,9 @@ public class WeatherManager : MonoBehaviour {
 		fillProbabilityMatrix();
 		fillAcumulativeDist();
 
-		Turn_Manager.OnTurnSystemStarted += startWeather;
-		Turn_Manager.OnTurnChanged += switchWeather;
-		Turn_Manager.OnTurnSystemFinished += printTimesByWeather;
+		Turn_Manager.EventOnTurnSystemStarted += startWeather;
+		Turn_Manager.EventOnTurnChanged += switchWeather;
+		Turn_Manager.EventOnTurnSystemFinished += printTimesByWeather;
 		
 	}
 

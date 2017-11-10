@@ -10,7 +10,7 @@ public class Phrase_Selector_Controller : MonoBehaviour {
 
 	private void Awake() {
 
-		Turn_Manager.OnTurnStarted += PickNewPhrases;
+		Turn_Manager.EventOnTurnStarted += PickNewPhrases;
 
 		phraseSelector = FindObjectsOfType<Phrase_Selector>();
 		if (phraseSelector.Length > 3) {
@@ -21,6 +21,10 @@ public class Phrase_Selector_Controller : MonoBehaviour {
 		}
 	}
 
+    private void OnDestroy()
+    {
+        Turn_Manager.EventOnTurnStarted -= PickNewPhrases;
+    }
 
     public void PickNewPhrases()
     {

@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class PlayersController : MonoBehaviour {
+public class PlayersController : NetworkBehaviour {
 
 	[SerializeField]
 	public PlayerGameObject player1;
@@ -12,13 +13,14 @@ public class PlayersController : MonoBehaviour {
 
 	private void Start() {
 
-        Turn_Manager.OnTurnSystemFinished += getFinalHeight;
+        Turn_Manager.EventOnTurnSystemFinished += getFinalHeight;
 
         switch (TypeOfParameter.Instance.currentPlayType)
         {
             case (TypeOfParameter.Parameter.local):
                 player1.player = new Player(1, new HumanBehaviour());
                 player2.player = new Player(2, new HumanBehaviour());
+                NetworkServer.SpawnObjects();
                 break;
 
             case (TypeOfParameter.Parameter.network):
@@ -30,11 +32,13 @@ public class PlayersController : MonoBehaviour {
             case (TypeOfParameter.Parameter.single):
                 player1.player = new Player(1, new HumanBehaviour());
                 player2.player = new Player(2, new CpuBehaviour());
+                NetworkServer.SpawnObjects();
                 break;
 
             default:
                 player1.player = new Player(1, new HumanBehaviour());
                 player2.player = new Player(2, new CpuBehaviour());
+                NetworkServer.SpawnObjects();
                 break;
         }
 	}

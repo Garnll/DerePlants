@@ -35,7 +35,7 @@ public class Phrase_Pool_Manager : MonoBehaviour
 		turn = 1;
         currentTurnOnPool = -1;
 
-		Turn_Manager.OnPlayerTurn += ChangeTurnOnPool;
+		Turn_Manager.EventOnPlayerTurn += ChangeTurnOnPool;
 
         phrasesPool = GameObject.FindObjectOfType<Phrase_Pool>();
         if (phrasesPool == null)
@@ -51,7 +51,7 @@ public class Phrase_Pool_Manager : MonoBehaviour
     }
 
 	private void OnDestroy() {
-		Turn_Manager.OnTurnChanged -= ChangeTurnOnPool;
+		Turn_Manager.EventOnTurnChanged -= ChangeTurnOnPool;
 	}
 
 	private void AddPoolsToUltraPool(Phrase[] pool)
