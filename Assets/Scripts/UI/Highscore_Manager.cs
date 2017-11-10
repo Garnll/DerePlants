@@ -12,13 +12,14 @@ public class Highscore_Manager : MonoBehaviour {
     public Animator hsAnim;
     public int pos;
 
+
     [SerializeField]
     private Text name, playerWin, heightWin;
 
 
     private void Start()
     {
-
+		hsAnim.SetBool("Finished", false);
         Turn_Manager.OnTurnSystemFinished += HighScoreAnim;
         Turn_Manager.OnGameFinished += ChangeNameHeight;
         
@@ -51,7 +52,7 @@ public class Highscore_Manager : MonoBehaviour {
         newName = name.text.ToString();
         Debug.Log(newName);
 
-    for (int pos= 0;pos < 10;pos++)
+    for (pos= 0;pos < 10;pos++)
         {
             Debug.Log(pos);
           /*  if (PlayerPrefs.HasKey(i + "HSCore"))
@@ -69,9 +70,11 @@ public class Highscore_Manager : MonoBehaviour {
                 PlayerPrefs.SetInt(i + "HScore", (int)newHeight);
                 PlayerPrefs.SetString(i + "HScoreName", newName);
                 newHeight = 10;
-                newName = "lol";*/           
-            }
+                newName = "lol";*/     
+
+
+        }
         SceneManager.LoadScene("Menu");
-    }
+    	}
     }
 
