@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 public class Menu_Controller : MonoBehaviour {
 
-    public string local, multiplayer, singleplayer, highscore;
+    public string local, host, join,  singleplayer, highscore;
     //public string[] sceneNames;
 	
     public void PassScene()
@@ -19,11 +19,17 @@ public class Menu_Controller : MonoBehaviour {
             SceneManager.LoadScene(local);
         }
 
-        if (name == "Button.Multiplayer")
+        if (name == "Button.Join")
         {
             TypeOfParameter.Instance.currentPlayType = TypeOfParameter.Parameter.network;
-            SceneManager.LoadScene(multiplayer);
+			SceneManager.LoadScene(join);
         }
+
+		if (name == "Button.Host")
+		{
+			TypeOfParameter.Instance.currentPlayType = TypeOfParameter.Parameter.network;
+			SceneManager.LoadScene(host);
+		}
 
         if (name == "Button.Singleplayer")
         {
