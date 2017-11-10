@@ -11,7 +11,10 @@ public class PlayersController : MonoBehaviour {
 	public PlayerGameObject player2;
 
 	private void Start() {
-		player1.player = new Player(1, new HumanBehaviour());
+
+        Turn_Manager.OnTurnSystemFinished += getFinalHeight;
+
+        player1.player = new Player(1, new HumanBehaviour());
 
         switch (TypeOfParameter.Instance.currentPlayType)
         {
@@ -33,4 +36,9 @@ public class PlayersController : MonoBehaviour {
         }
 	}
 
+    public void getFinalHeight()
+    {
+        player1.player.score = (int)player1.plant.height;
+        player2.player.score = (int)player2.plant.height;
+    }
 }

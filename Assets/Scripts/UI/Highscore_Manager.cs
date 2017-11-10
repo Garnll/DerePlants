@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Highscore_Manager : MonoBehaviour {
 
@@ -9,6 +10,7 @@ public class Highscore_Manager : MonoBehaviour {
     public string newName, oldName;
     public Turn_Manager currentTurn;
     public Animator hsAnim;
+    public int pos;
 
     [SerializeField]
     private Text name, playerWin, heightWin;
@@ -16,22 +18,31 @@ public class Highscore_Manager : MonoBehaviour {
 
     private void Start()
     {
+
         Turn_Manager.OnTurnSystemFinished += HighScoreAnim;
         Turn_Manager.OnGameFinished += ChangeNameHeight;
-
-
+        
     }
 
+    private void OnDestroy()
+    {
+        Turn_Manager.OnTurnSystemFinished -= HighScoreAnim;
+        Turn_Manager.OnGameFinished -= ChangeNameHeight;
+    }
+
+    
     private void HighScoreAnim()
     {
-        //hsAnim.Play("HighscoreFinishDrop");
-        hsAnim.SetBool("Finished", true);
+            hsAnim.SetBool("Finished", true);
+        
     }
 
     private void ChangeNameHeight(int ID, float score)
     {
         playerWin.text = "Player " + ID.ToString() + " won";
-        heightWin.text = "Height: " + score.ToString("F");
+        heightWin.text = "Height: " + score.ToString("F") + " m";
+        newHeight = score;
+
 
     }
 
@@ -40,23 +51,27 @@ public class Highscore_Manager : MonoBehaviour {
         newName = name.text.ToString();
         Debug.Log(newName);
 
-    for (int i= 0;i< 10;i++)
+    for (int pos= 0;pos < 10;pos++)
         {
-            if (PlayerPrefs.HasKey(i + "HSCore"))
-            {
+            Debug.Log(pos);
+          /*  if (PlayerPrefs.HasKey(i + "HSCore"))
+            {*/
+
+                    oldHeight = PlayerPrefs.GetInt(pos + "HScore");
+                    oldName = PlayerPrefs.GetString(pos + "HScoreName");
+                    PlayerPrefs.SetInt(pos + "HScore", (int)newHeight);
+                    PlayerPrefs.SetString(pos + "HScoreName", newName);
+                newHeight = oldHeight;
+                newName = oldName;         
             
-                    //oldHeight = PlayerPrefs.GetInt(i + "HScore");
-                    oldName = PlayerPrefs.GetString(i + "HScoreName");
-                   // PlayerPrefs.SetInt(i + "HScore", newHeight);
-                    PlayerPrefs.SetString(i + "HScoreName", newName);
-
-
-                             
+           /* } else
+            {
+                PlayerPrefs.SetInt(i + "HScore", (int)newHeight);
+                PlayerPrefs.SetString(i + "HScoreName", newName);
+                newHeight = 10;
+                newName = "lol";*/           
             }
-
-        }
-
-
+        SceneManager.LoadScene("Menu");
+    }
     }
 
-}

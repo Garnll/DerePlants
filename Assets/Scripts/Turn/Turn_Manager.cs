@@ -75,7 +75,9 @@ public class Turn_Manager : MonoBehaviour {
         }
         else{
             OnTurnSystemFinished();
-            OnGameFinished(currentPlayer.id, currentPlayer.score);
+
+            Player winner = compareHeights();
+            OnGameFinished(winner.id, winner.score);
         }
 	}
 
@@ -106,7 +108,9 @@ public class Turn_Manager : MonoBehaviour {
         //Esto evita que al pasar de TOTAL_TURNS, al accionar los botones siga intentano cambiar de turno
         if (currentTurn >= TOTAL_TURNS){
             OnTurnSystemFinished();
-            OnGameFinished(currentPlayer.id, currentPlayer.score);
+
+            Player winner = compareHeights();
+            OnGameFinished(winner.id, winner.score);
             return;
         }
         StopCoroutine("turn");//Se para la corrutina para que no funcione unicamente en loop y se pueda cancelar al hundir un botón
@@ -127,5 +131,25 @@ public class Turn_Manager : MonoBehaviour {
     public void stopTurns()
     {
         StopCoroutine("turn");//Se para la corrutina para que no funcione unicamente en loop y se pueda cancelar al hundir un botón
+    }
+
+    private Player compareHeights()
+    {
+        Player Pwinner = null;
+
+        if (players[0].score > players[1].score)
+        {
+            Pwinner = players[0];
+        } else if (players[0].score < players[1].score)
+        {
+            Pwinner = players[1];
+        } else
+        {
+            int r = Random.Range(0, 2);
+            Pwinner = players[r];
+        }
+
+        return Pwinner;
+
     }
 }
