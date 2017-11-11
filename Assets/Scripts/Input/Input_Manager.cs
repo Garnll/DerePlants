@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 public class Input_Manager : NetworkBehaviour {
 
@@ -113,5 +114,10 @@ public class Input_Manager : NetworkBehaviour {
         {
             return phrasesButtons.Length;
         }
+    }
+
+    public void CloseGame()
+    {
+        SceneManager.LoadScene("Menu");
     }
 }
