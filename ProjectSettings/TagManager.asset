@@ -13,6 +13,12 @@ TagManager:
   - Face2
   - Head2
   - Stem2
+  - Umbrella1
+  - Scarf1
+  - Sunglasses1
+  - Umbrella2
+  - Scarf2
+  - Sunglasses2
   layers:
   - Default
   - TransparentFX
