@@ -99,6 +99,13 @@ public class Input_Manager : NetworkBehaviour {
         Debug.Log("Button has been pressed by the EA");
     }
 
+    public void ItemButtonPressed(string tagPlanta)
+    {
+        GameObject item = GameObject.FindGameObjectWithTag(tagPlanta);
+
+        showUI.HideButtons();
+        turnManager.stopTurns(); 
+    }
 
     public int ButtonNumber
     {
